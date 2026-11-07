@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Osmossi Music · Sound for Instagram</title>
+  <meta name="description" content="Create original music for Osmossi.purpose reels, stories and carousels." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Osmossi.purpose</p>
+    <h1>Osmossi Music</h1>
+    <p class="lede">Create an original soundtrack for your next reel, story or carousel in three steps.</p>
+    <p class="credits" id="credits" hidden></p>
+  </header>
+
+  <main>
+    <form id="form" novalidate>
+      <!-- STEP 1 -->
+      <section class="step">
+        <h2><span class="num">1</span> What are you posting?</h2>
+        <div class="choices" data-group="contentType" role="radiogroup" aria-label="Content type"></div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step">
+        <h2><span class="num">2</span> What is it about?</h2>
+        <div class="choices" data-group="topic" role="radiogroup" aria-label="Topic"></div>
+        <label class="field">
+          <span>Details (optional)</span>
+          <input type="text" id="details" maxlength="200"
+                 placeholder="e.g. hand-woven linen bag, morning ritual, meet the ceramist in Oaxaca" />
+        </label>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step">
+        <h2><span class="num">3</span> What should people feel?</h2>
+        <p class="hint">Choose one or two emotions.</p>
+        <div class="choices chips" data-group="emotion" data-multi="2" role="group" aria-label="Emotion"></div>
+      </section>
+
+      <!-- OPTIONS -->
+      <details class="step advanced">
+        <summary>More options</summary>
+
+        <label class="field">
+          <span>Length: <strong id="durationLabel">30 s</strong></span>
+          <input type="range" id="duration" min="10" max="120" step="5" value="30" />
+        </label>
+
+        <fieldset class="field">
+          <legend>Voice</legend>
+          <label class="inline"><input type="radio" name="voice" value="instrumental" checked /> Instrumental (best under voice-over or text)</label>
+          <label class="inline"><input type="radio" name="voice" value="vocals" /> With vocals</label>
+        </fieldset>
+
+        <div id="vocalOptions" hidden>
+          <label class="field">
+            <span>Lyrics (optional; leave empty and Suno writes them)</span>
+            <textarea id="lyrics" rows="4" maxlength="5000" placeholder="[Verse] ..."></textarea>
+          </label>
+          <label class="field">
+            <span>Voice preference (only with your own lyrics)</span>
+            <select id="vocalGender">
+              <option value="">No preference</option>
+              <option value="f">Female</option>
+              <option value="m">Male</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Model</span>
+          <select id="model">
+            <option value="V6" selected>V6 · best quality (recommended)</option>
+            <option value="V6_MINI">V6 Mini · faster</option>
+            <option value="V6_WILD">V6 Wild · bolder, more experimental</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Music style sent to Suno (edit freely)</span>
+          <textarea id="style" rows="4" maxlength="1000"></textarea>
+        </label>
+        <label class="field">
+          <span>Avoid</span>
+          <input type="text" id="negativeTags" maxlength="1000" />
+        </label>
+        <button type="button" class="link" id="resetPrompt">Rebuild style from my choices</button>
+      </details>
+
+      <div class="actions">
+        <button type="submit" id="submit" class="primary">Create music</button>
+      </div>
+      <p class="error" id="error" role="alert" hidden></p>
+    </form>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <h2>Your tracks</h2>
+      <p class="status" id="status"></p>
+      <div class="tracks" id="tracks"></div>
+      <p class="hint">Suno makes two versions per request. Files are kept for 14 days: download the one you like.</p>
+    </section>
+  </main>
+
+  <dialog id="pwDialog">
+    <form method="dialog" id="pwForm">
+      <h3>App password</h3>
+      <p>Enter the team password to create music.</p>
+      <input type="password" id="pwInput" autocomplete="current-password" required />
+      <menu><button class="primary" value="ok">Continue</button></menu>
+    </form>
+  </dialog>
+
+  <footer>Made for Osmossi.purpose · Powered by SunoAPI</footer>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
